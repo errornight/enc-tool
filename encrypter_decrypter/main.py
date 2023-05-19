@@ -1,18 +1,17 @@
 from encrypter_decrypter import enc_tool as enc
 import argparse
 import json
+from encrypter_decrypter.config import config
 # Just styles
 from colorama import Fore, Style, init
 init(autoreset=True)
 
-# read data from config file
-with open("encrypter_decrypter/config/config.json", "r") as file:
-    config = json.load(file)
+
 
 
 def main():
-    parser = argparse.ArgumentParser(prog= config['name'], 
-                                    description= config['description'])
+    parser = argparse.ArgumentParser(prog= config.NAME + config.VERSION, 
+                                    description= config.DESCRIPTION)
     parser.add_argument('data', nargs='?', help="The message you want to encrypt.")
     parser.add_argument('-p', '--password', help="Password to encrypt or decrypt your data.", required=True)
     parser.add_argument('-d', '--decrypt', help="Add this for decryption", action="store_true")
