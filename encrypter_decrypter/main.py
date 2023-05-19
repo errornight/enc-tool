@@ -1,4 +1,4 @@
-from encrypter_decrypter import enc_tool as enc
+import enc_tool as enc
 import argparse
 # Just styles
 from colorama import Fore, Style, init
@@ -21,7 +21,8 @@ def main():
             data = enc.read_data(args.file)
             enc_data = enc.fernet_encrypt(data, args.password)
 
-            file_path = args.save or f'encrypted_{args.file}'
+            path = enc.path_manager(args.file)
+            file_path = args.save or f'{path[0]}encrypted_{path[1]}'
             enc.save_data(enc_data, file_path)
             print(Fore.BLUE + "Your data was encrypted succesfully.", 
               Style.BRIGHT + Fore.WHITE + f"Encrypted data saved in '{file_path}'",
@@ -51,7 +52,8 @@ def main():
             data = enc.read_data(args.file)
             dec_data = enc.fernet_decrypt(data, args.password)
 
-            file_path = args.save or f'decrypted_{args.file}'
+            path = enc.path_manager(args.file)
+            file_path = args.save or f'{path[0]}decrypted_{path[1]}'
             enc.save_data(dec_data, file_path)
             print(Fore.GREEN + "Your data was decrypted succesfully.", 
               Style.BRIGHT + Fore.WHITE + f"Decrypted data saved in '{file_path}'",

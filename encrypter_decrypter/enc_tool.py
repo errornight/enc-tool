@@ -3,7 +3,9 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.backends import default_backend
 from cryptography.fernet import Fernet, InvalidToken
 import sys
-from colorama import Fore, Style
+from colorama import Fore, Style, init
+init(autoreset=True)
+import os
 
 def fernet_encrypt(data, password):
     # generate encryption KEY base on the password provided!
@@ -58,3 +60,14 @@ def read_data(path):
     except UnicodeDecodeError:
         print(Fore.RED + Style.BRIGHT + "ENC still can not encrypt this kind of file!\nThis feature will be added soon...")
         sys.exit()
+
+def path_manager(path):
+    # check if the given path is a file and exists
+    if not os.path.isfile(path) or not os.path.exists(path):
+        print(Fore.RED + f"Your given path: {path}, Does not exists or is not a file!")
+        sys.exit()
+    
+    file_path = os.path.abspath(path)
+
+    return [os.path.dirname(file_path) + "/", os.path.basename(file_path)]
+    
