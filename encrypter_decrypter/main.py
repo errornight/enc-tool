@@ -15,7 +15,7 @@ def main():
                                     description= config['description'])
     parser.add_argument('data', nargs='?', help="The message you want to encrypt.")
     parser.add_argument('-p', '--password', help="Password to encrypt or decrypt your data.", required=True)
-    parser.add_argument('-dec', '--decrypt', help="Add this for decryption", action="store_true")
+    parser.add_argument('-d', '--decrypt', help="Add this for decryption", action="store_true")
     parser.add_argument('-s', '--save', help="Path to file that encrypted / decrypted data will be saved in.")
     parser.add_argument('-f', '--file', help="Path to file that you want encrypt / decrypt data in it.")
     args = parser.parse_args()
