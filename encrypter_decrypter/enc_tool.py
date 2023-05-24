@@ -40,10 +40,18 @@ def fernet_decrypt(data, password):
 
 
 def save_data(data, path):
-
-    with open(path, 'w') as file:
+    try:
+        with open(path, 'w') as file:
             file.write(data)
-    return path
+        return path
+    except IsADirectoryError:
+        print(Fore.RED + "Error: Please enter a valid path to save your encrypted data!")
+        sys.exit()
+    except FileNotFoundError:
+        print(Fore.RED + "Error: Please enter a valid path to save your encrypted data!")
+        sys.exit()
+
+        
 
 
 def read_data(path):
